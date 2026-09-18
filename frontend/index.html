@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Public Service Complaint System</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            background: #333;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ddd;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #666;
+            margin-top: 15px;
+        }
+
+        /* Main */
+        .container {
+            max-width: 1000px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome h2 {
+            font-size: 28px;
+        }
+
+        .welcome p {
+            color: #666;
+        }
+
+        /* Cards */
+        .cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            width: 260px;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .card p {
+            color: #666;
+            min-height: 55px;
+            line-height: 1.5;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 20px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .card a:hover {
+            background: #555;
+        }
+
+        /* How it works */
+        .how-it-works {
+            background: white;
+            margin-top: 40px;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .step {
+            width: 200px;
+            padding: 15px;
+        }
+
+        .step-number {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .step p {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            background: #333;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav>
+    <a href="index.html">Home</a>
+    <a href="complaint.html">Submit Complaint</a>
+    <a href="track.html">Track Complaint</a>
+    <a href="admin.html">Admin Dashboard</a>
+</nav>
+
+<!-- Header -->
+<header>
+    <h1>Public Service Complaint System</h1>
+
+    <p>
+        Report public service issues and track their resolution
+    </p>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+
+    <div class="welcome">
+
+        <h2>Welcome to the Public Service Portal</h2>
+
+        <p>
+            Use this system to report public service problems,
+            track complaints, and monitor their resolution.
+        </p>
+
+    </div>
+
+    <!-- Main Options -->
+    <div class="cards">
+
+        <div class="card">
+
+            <h2>📝 Submit Complaint</h2>
+
+            <p>
+                Report a public service issue with details,
+                location and an optional photo.
+            </p>
+
+            <a href="complaint.html">
+                Submit Complaint
+            </a>
+
+        </div>
+
+        <div class="card">
+
+            <h2>🔍 Track Complaint</h2>
+
+            <p>
+                Enter your complaint ID to check its
+                current status and department.
+            </p>
+
+            <a href="track.html">
+                Track Complaint
+            </a>
+
+        </div>
+
+        <div class="card">
+
+            <h2>⚙️ Admin Dashboard</h2>
+
+            <p>
+                View submitted complaints and update
+                their current status.
+            </p>
+
+            <a href="admin.html">
+                Admin Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- How It Works -->
+    <div class="how-it-works">
+
+        <h2>How the System Works</h2>
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">1</div>
+
+                <h3>Submit</h3>
+
+                <p>
+                    Citizen submits a complaint with
+                    details and location.
+                </p>
+
+            </div>
+
+            <div class="step">
+
+                <div class="step-number">2</div>
+
+                <h3>AI Classification</h3>
+
+                <p>
+                    The system automatically identifies
+                    the complaint category.
+                </p>
+
+            </div>
+
+            <div class="step">
+
+                <div class="step-number">3</div>
+
+                <h3>Department</h3>
+
+                <p>
+                    The complaint is mapped to the
+                    concerned department.
+                </p>
+
+            </div>
+
+            <div class="step">
+
+                <div class="step-number">4</div>
+
+                <h3>Track</h3>
+
+                <p>
+                    Citizen can track the complaint
+                    status until resolution.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+
+    Public Service Complaint System © 2026
+
+</footer>
+
+</body>
+</html>

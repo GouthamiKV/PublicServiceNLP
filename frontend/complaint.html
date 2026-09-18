@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Public Service Complaint</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: #333;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ddd;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        textarea,
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 8px;
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 25px;
+            background: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+        #result {
+            margin-top: 25px;
+            padding: 15px;
+        }
+
+        .success {
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+        }
+
+        .error {
+            background: #ffebee;
+            border: 1px solid #f44336;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <a href="index.html">Home</a>
+    <a href="complaint.html">Submit Complaint</a>
+    <a href="track.html">Track Complaint</a>
+    <a href="admin.html">Admin Dashboard</a>
+</nav>
+
+<div class="container">
+
+    <h1>Submit Public Service Complaint</h1>
+
+    <form id="complaintForm">
+
+        <label>Complaint Details</label>
+
+        <textarea
+            id="complaint_text"
+            placeholder="Describe your complaint"
+            required
+        ></textarea>
+
+        <label>Location</label>
+
+        <input
+            type="text"
+            id="location"
+            placeholder="Enter your location"
+            required
+        >
+
+        <label>Upload Photo (Optional)</label>
+
+        <input
+            type="file"
+            id="photo"
+            accept="image/*"
+        >
+
+        <button type="submit">
+            Submit Complaint
+        </button>
+
+    </form>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+document.getElementById("complaintForm").addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+        const result = document.getElementById("result");
+
+        result.innerHTML = "Submitting complaint...";
+        result.className = "";
+
+        const complaintText =
+            document.getElementById("complaint_text").value;
+
+        const location =
+            document.getElementById("location").value;
+
+        const photoInput =
+            document.getElementById("photo");
+
+        const formData = new FormData();
+
+        formData.append(
+            "complaint_text",
+            complaintText
+        );
+
+        formData.append(
+            "location",
+            location
+        );
+
+        if (photoInput.files.length > 0) {
+
+            formData.append(
+                "photo",
+                photoInput.files[0]
+            );
+
+        }
+
+        try {
+
+            const response = await fetch(
+                "http://127.0.0.1:8000/complaints",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+
+                result.className = "error";
+
+                result.innerHTML =
+                    "<strong>Error:</strong> " +
+                    (data.detail || "Complaint submission failed.");
+
+                return;
+            }
+
+            result.className = "success";
+
+            result.innerHTML = `
+                <h3>Complaint Submitted Successfully!</h3>
+
+                <p>
+                    <strong>Complaint ID:</strong>
+                    ${data.complaint_id}
+                </p>
+
+                <p>
+                    <strong>Category:</strong>
+                    ${data.category}
+                </p>
+
+                <p>
+                    <strong>Department:</strong>
+                    ${data.department}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    ${data.status}
+                </p>
+
+                <p>
+                    <strong>Photo:</strong>
+                    ${data.photo
+                        ? "Uploaded successfully"
+                        : "No photo uploaded"}
+                </p>
+            `;
+
+            document.getElementById("complaintForm").reset();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            result.className = "error";
+
+            result.innerHTML =
+                "<strong>Unable to connect to the server.</strong><br>" +
+                "Please make sure FastAPI is running.";
+
+        }
+
+    }
+
+);
+
+</script>
+
+</body>
+</html>
