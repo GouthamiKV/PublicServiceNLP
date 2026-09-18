@@ -6,3 +6,6 @@ numpy
 joblib
 sqlalchemy
 python-multipart
+streamlit
+pandas 
+numpy
