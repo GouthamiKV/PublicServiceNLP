@@ -2,6 +2,7 @@ import streamlit as st
 import os
 
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import OperationalError
 
 from backend.database import SessionLocal, engine, Base
 from backend.model import Complaint
@@ -17,7 +18,11 @@ from backend.automation import (
 # DATABASE / UPLOAD SETUP
 # =========================================================
 
-Base.metadata.create_all(bind=engine)
+try:
+    Base.metadata.create_all(bind=engine)
+except OperationalError as e:
+    if "already exists" not in str(e):
+        raise
 
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -1087,7 +1092,8 @@ def admin_page():
     finally:
 
         db.close()
-        # =========================================================
+
+# =========================================================
 # SIDEBAR
 # =========================================================
 
@@ -1105,23 +1111,15 @@ page = st.sidebar.radio(
     ]
 )
 
-
 # =========================================================
 # PAGE ROUTING
 # =========================================================
 
 if page == "🏠 Home":
-
     home_page()
-
 elif page == "📝 Submit Complaint":
-
     submit_page()
-
 elif page == "🔎 Track Complaint":
-
     track_page()
-
 elif page == "👨‍💼 Admin Dashboard":
-
     admin_page()
